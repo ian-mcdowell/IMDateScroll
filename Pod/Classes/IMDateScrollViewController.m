@@ -66,6 +66,11 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)reloadData {
+    [self.tableView reloadData];
+    [self.headerDateView reloadData];
+}
+
 # pragma mark UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return self.dates.count;
@@ -77,12 +82,12 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-	NSDate *date = [self.dates objectAtIndex:section];
-	
-	if ([self.delegate respondsToSelector:@selector(dateScrollView:titleForDate:)]) {
-		return [self.delegate dateScrollView:self titleForDate:date];
-	}
-	
+    NSDate *date = [self.dates objectAtIndex:section];
+    
+    if ([self.delegate respondsToSelector:@selector(dateScrollView:titleForDate:)]) {
+        return [self.delegate dateScrollView:self titleForDate:date];
+    }
+    
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"eeee, MMM dd, yyyy"];
     
@@ -90,13 +95,13 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	NSDate *date = [self.dates objectAtIndex:indexPath.section];
-	NSString *event = [[self.events objectForKey:date] objectAtIndex:indexPath.row];
-	
-	if ([self.delegate respondsToSelector:@selector(dateScrollView:cellForEventOnDate:)]) {
-		return [self.delegate dateScrollView:self cellForEventOnDate:date];
-	}
-	
+    NSDate *date = [self.dates objectAtIndex:indexPath.section];
+    NSString *event = [[self.events objectForKey:date] objectAtIndex:indexPath.row];
+    
+    if ([self.delegate respondsToSelector:@selector(dateScrollView:cellForEvent:onDate:)]) {
+        return [self.delegate dateScrollView:self cellForEvent:indexPath.row onDate:date];
+    }
+    
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     
     cell.textLabel.text = event;
@@ -105,10 +110,10 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	NSDate *date = [self.dates objectAtIndex:indexPath.section];
-	if ([self.delegate respondsToSelector:@selector(dateScrollView:didSelectEventOnDate:)]) {
-		[self.delegate dateScrollView:self didSelectEventOnDate:date];
-	}
+    NSDate *date = [self.dates objectAtIndex:indexPath.section];
+    if ([self.delegate respondsToSelector:@selector(dateScrollView:didSelectEventOnDate:)]) {
+        [self.delegate dateScrollView:self didSelectEventOnDate:date];
+    }
 }
 
 #pragma mark UIScrollViewDelegate
@@ -118,7 +123,7 @@
         NSNumber *mostCommon;
         NSDecimalNumber *curMax = [NSDecimalNumber zero];
         NSMutableDictionary *words = [NSMutableDictionary dictionary];
-    
+        
         for (NSIndexPath *i in [self.tableView indexPathsForVisibleRows]) {
             NSUInteger sectionPath = [i indexAtPosition:0];
             NSNumber *key = [NSNumber numberWithInteger:sectionPath];
@@ -127,13 +132,13 @@
             }
             
             words[key] = [words[key] decimalNumberByAdding:[NSDecimalNumber one]];
-        
+            
             if ([words[key] compare:curMax] == NSOrderedDescending) {
                 mostCommon = key;
                 curMax = words[key];
             }
         }
-    
+        
         NSInteger day = [mostCommon integerValue];
         if (self.currentSelectedDay != day && !self.scrollingToDay && self.dates.count > 0) {
             NSIndexPath *indexPath = [NSIndexPath indexPathForRow:day inSection:0];
@@ -165,13 +170,13 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-	NSDate *date = [self.dates objectAtIndex:indexPath.row];
-	
-	if ([self.delegate respondsToSelector:@selector(dateScrollView:headerCellForDate:)]) {
-		return [self.delegate dateScrollView:self headerCellForDate:date];
-	}
-	
-	
+    NSDate *date = [self.dates objectAtIndex:indexPath.row];
+    
+    if ([self.delegate respondsToSelector:@selector(dateScrollView:headerCellForDate:)]) {
+        return [self.delegate dateScrollView:self headerCellForDate:date];
+    }
+    
+    
     IMDateScrollHeaderDateCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"IMDateScrollHeaderDateCell" forIndexPath:indexPath];
     
     NSDateFormatter *weekdayFormatter = [[NSDateFormatter alloc] init];
@@ -183,7 +188,7 @@
     NSDateFormatter *dayFormatter = [[NSDateFormatter alloc] init];
     [dayFormatter setDateFormat:@"dd"];
     
-	
+    
     
     cell.weekdayLabel.text = [[weekdayFormatter stringFromDate:date] uppercaseString];
     cell.dayLabel.text = [dayFormatter stringFromDate:date];

@@ -20,5 +20,7 @@
 
 @property CGFloat headerHeight;
 
+- (void)reloadData;
+
 @end
 

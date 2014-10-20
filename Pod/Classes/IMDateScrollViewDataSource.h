@@ -13,7 +13,7 @@
 
 @optional
 - (UICollectionViewCell *)dateScrollView:(IMDateScrollViewController *)dateScrollView headerCellForDate:(NSDate *)date;
-- (UITableViewCell *)dateScrollView:(IMDateScrollViewController *)dateScrollView cellForEventOnDate:(NSDate *)date;
+- (UITableViewCell *)dateScrollView:(IMDateScrollViewController *)dateScrollView cellForEvent:(NSInteger)event onDate:(NSDate *)date;
 - (NSString *)dateScrollView:(IMDateScrollViewController *)dateScrollView titleForDate:(NSDate *)date;
 - (void)dateScrollView:(IMDateScrollViewController *)dateScrollView didSelectEventOnDate:(NSDate *)date;
 
