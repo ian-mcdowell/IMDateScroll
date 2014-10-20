@@ -1,0 +1,14 @@
+PODS:
+  - IMDateScroll (0.1.0)
+
+DEPENDENCIES:
+  - IMDateScroll (from `../`)
+
+EXTERNAL SOURCES:
+  IMDateScroll:
+    :path: ../
+
+SPEC CHECKSUMS:
+  IMDateScroll: 4bb17447b4c7326b215392d26c4227f7bd765f6c
+
+COCOAPODS: 0.34.4

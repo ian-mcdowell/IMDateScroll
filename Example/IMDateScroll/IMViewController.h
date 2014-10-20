@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 ian mcdowell. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "IMDateScrollViewController.h"
 
-@interface IMViewController : UIViewController
+@interface IMViewController : IMDateScrollViewController <IMDateScrollViewDataSource>
 
 @end
