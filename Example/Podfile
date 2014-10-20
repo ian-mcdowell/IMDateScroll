@@ -1,0 +1,11 @@
+source 'https://github.com/CocoaPods/Specs.git'
+
+target 'IMDateScroll', :exclusive => true do
+  pod "IMDateScroll", :path => "../"
+end
+
+target 'Tests', :exclusive => true do
+  pod "IMDateScroll", :path => "../"
+
+  
+end
