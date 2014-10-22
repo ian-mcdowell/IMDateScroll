@@ -12,7 +12,7 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 Check out the sample view controller in the example project. There are a few delegate methods you can implement if you wish (none are required), including:
 
 	- (UICollectionViewCell *)dateScrollView:(IMDateScrollViewController *)dateScrollView headerCellForDate:(NSDate *)date
-	- (UITableViewCell *)dateScrollView:(IMDateScrollViewController *)dateScrollView cellForEventOnDate:(NSDate *)date
+	- (UITableViewCell *)dateScrollView:(IMDateScrollViewController *)dateScrollView cellForEvent:(NSInteger)event onDate:(NSDate *)date
 	- (NSString *)dateScrollView:(IMDateScrollViewController *)dateScrollView titleForDate:(NSDate *)date
 	- (void)dateScrollView:(IMDateScrollViewController *)dateScrollView didSelectEventOnDate:(NSDate *)date
 
@@ -22,8 +22,8 @@ This library uses two data sets:
 
 ## Requirements
 
-Only tested on iOS 7+
-Requires ARC
+* Only tested on iOS 7+
+* Requires ARC
 
 ## Installation
 

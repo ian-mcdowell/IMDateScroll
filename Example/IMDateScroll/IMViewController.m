@@ -17,6 +17,8 @@
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	
+	[self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
+	
 	[self initSampleDates];
 	[self setDelegate:self];
 }
@@ -44,7 +46,7 @@
 	
  }*/
 /*
- - (UITableViewCell *)dateScrollView:(IMDateScrollViewController *)dateScrollView cellForEventOnDate:(NSDate *)date {
+ - (UITableViewCell *)dateScrollView:(IMDateScrollViewController *)dateScrollView cellForEvent:(NSInteger)event onDate:(NSDate *)date {
 	UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"];
 	
 	// do cell configuration here

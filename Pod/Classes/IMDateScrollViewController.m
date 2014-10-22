@@ -46,7 +46,7 @@
     self.headerDateView.pagingEnabled = YES;
     self.headerDateView.showsHorizontalScrollIndicator = NO;
     
-    [self.headerDateView setBackgroundColor:[UIColor darkGrayColor]];
+    [self.headerDateView setBackgroundColor:[UIColor whiteColor]];
     
     [self.headerView addSubview:self.headerDateView];
     
@@ -123,8 +123,13 @@
         NSNumber *mostCommon;
         NSDecimalNumber *curMax = [NSDecimalNumber zero];
         NSMutableDictionary *words = [NSMutableDictionary dictionary];
+		
+		NSArray *visibleIndexPaths = [self.tableView indexPathsForVisibleRows];
+		if ([visibleIndexPaths count] > 10) {
+			return;
+		}
         
-        for (NSIndexPath *i in [self.tableView indexPathsForVisibleRows]) {
+        for (NSIndexPath *i in visibleIndexPaths) {
             NSUInteger sectionPath = [i indexAtPosition:0];
             NSNumber *key = [NSNumber numberWithInteger:sectionPath];
             if (!words[key]) {
