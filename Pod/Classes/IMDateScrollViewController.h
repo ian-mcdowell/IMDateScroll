@@ -18,7 +18,8 @@
 @property (nonatomic, strong) NSArray *dates;
 @property (nonatomic, strong) NSDictionary *events;
 
-@property CGFloat headerHeight;
+@property CGFloat headerDayHeight;
+@property CGFloat headerMonthHeight;
 
 - (void)reloadData;
 
