@@ -21,22 +21,25 @@
 - (void)setup:(CGRect)frame {
     [self setBackgroundColor:[UIColor clearColor]];
     
-    CGFloat centerOffset = (frame.size.height - frame.size.width) / 2 + 5;
+    CGFloat width = MIN(frame.size.width, frame.size.height);
     
-    self.circleView = [[UIView alloc] initWithFrame:CGRectMake(5, centerOffset, frame.size.width - 10, frame.size.width - 10)];
+    CGFloat verticalOffset = (frame.size.height - width) / 2 + 5;
+    CGFloat horizontalOffset = (frame.size.width - width) / 2 + 5;
+    
+    self.circleView = [[UIView alloc] initWithFrame:CGRectMake(horizontalOffset, verticalOffset, width - 10, width - 10)];
     [self.circleView setBackgroundColor:[UIColor lightGrayColor]];
     
-    self.weekdayLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.circleView.frame.size.width, 20.0f)];
+    self.weekdayLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.circleView.frame.size.width, (self.circleView.frame.size.height / 4.0))];
     self.weekdayLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:self.circleView.frame.size.height / 5];
     self.weekdayLabel.textAlignment = NSTextAlignmentCenter;
     self.weekdayLabel.textColor = [UIColor whiteColor];
     
-    self.dayLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, (self.circleView.frame.size.height / 2) - 20.0f, self.circleView.frame.size.width, 40.0f)];
+    self.dayLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, (self.circleView.frame.size.height / 2) - (self.circleView.frame.size.height / 4.0), self.circleView.frame.size.width, (self.circleView.frame.size.height / 2.0))];
     self.dayLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:self.circleView.frame.size.height / 2.0];
     self.dayLabel.textAlignment = NSTextAlignmentCenter;
     self.dayLabel.textColor = [UIColor whiteColor];
     
-    self.monthLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, self.circleView.frame.size.height - 20.0f, self.circleView.frame.size.width, 20.0f)];
+    self.monthLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, self.circleView.frame.size.height - (self.circleView.frame.size.height / 4.0), self.circleView.frame.size.width, (self.circleView.frame.size.height / 4.0))];
     self.monthLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:self.circleView.frame.size.height / 5];
     self.monthLabel.textAlignment = NSTextAlignmentCenter;
     self.monthLabel.textColor = [UIColor whiteColor];

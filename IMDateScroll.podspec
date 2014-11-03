@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "IMDateScroll"
-  s.version          = "0.1.1"
+  s.version          = "0.2.1"
   s.summary          = "Simple date selector library for iOS"
   s.description      = <<-DESC
                        Jump to a specific day (section) of the events list by tapping on the scrollable header at the top. Simple and easy to use.

@@ -33,7 +33,7 @@
     
     self.edgesForExtendedLayout = UIRectEdgeNone;
     
-    self.headerDayHeight = 80.0f;
+    self.headerDayHeight = self.view.frame.size.height / 8.0;
     self.headerMonthHeight = 50.0f;
     self.currentSelectedDay = -1;
     self.currentSelectedMonth = -1;
