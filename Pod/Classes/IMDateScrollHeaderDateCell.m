@@ -21,9 +21,13 @@
 - (void)setup:(CGRect)frame {
     [self setBackgroundColor:[UIColor clearColor]];
     
-    CGFloat centerOffset = (frame.size.height - frame.size.width) / 2 + 10 + 5;
+    CGFloat width = MIN(frame.size.width, frame.size.height) - 20;
     
-    self.circleView = [[UIView alloc] initWithFrame:CGRectMake(10, centerOffset, frame.size.width - 20, frame.size.width - 20)];
+    CGFloat centerYOffset = (frame.size.height - width) / 2 + 5;
+    CGFloat centerXOffset = (frame.size.width - width) / 2;
+    
+    
+    self.circleView = [[UIView alloc] initWithFrame:CGRectMake(centerXOffset, centerYOffset, width, width)];
     [self.circleView setBackgroundColor:[UIColor colorWithWhite:0.6f alpha:0.5f]];
     
     self.weekdayLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 5.0f, frame.size.width, 10.0f)];

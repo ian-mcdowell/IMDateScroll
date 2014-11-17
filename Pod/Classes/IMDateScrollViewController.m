@@ -329,8 +329,11 @@
         NSDate *date = [self.months objectAtIndex:indexPath.row];
         
         NSDateFormatter *monthFormatter = [[NSDateFormatter alloc] init];
-        [monthFormatter setDateFormat:@"MMMM yyyy"];
+        [monthFormatter setDateFormat:@"MMMM"];
+        NSDateFormatter *yearFormatter = [[NSDateFormatter alloc] init];
+        [yearFormatter setDateFormat:@"yyyy"];
         cell.monthLabel.text = [monthFormatter stringFromDate:date];
+        cell.yearLabel.text = [yearFormatter stringFromDate:date];
         
         return cell;
     }
