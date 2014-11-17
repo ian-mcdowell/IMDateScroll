@@ -33,7 +33,7 @@
     
     self.edgesForExtendedLayout = UIRectEdgeNone;
     
-    self.headerDayHeight = self.view.frame.size.height / 8.0;
+    self.headerDayHeight = 70.0f;
     self.headerMonthHeight = 50.0f;
     self.currentSelectedDay = -1;
     self.currentSelectedMonth = -1;
@@ -49,7 +49,7 @@
     [layout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
     layout.minimumInteritemSpacing = 0;
     layout.minimumLineSpacing = 0;
-    layout.itemSize = CGSizeMake(self.view.bounds.size.width / 5.0, self.headerDayHeight);
+    layout.itemSize = CGSizeMake(self.view.bounds.size.width / 7.0, self.headerDayHeight);
     
     self.headerDateView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, self.headerMonthHeight, self.view.bounds.size.width, self.headerDayHeight) collectionViewLayout:layout];
     
@@ -185,11 +185,11 @@
         return;
     }
     if (scrollView == self.tableView) {
-		
-		NSArray *visibleIndexPaths = [self.tableView indexPathsForVisibleRows];
-		if ([visibleIndexPaths count] > 10) {
-			return;
-		}
+        
+        NSArray *visibleIndexPaths = [self.tableView indexPathsForVisibleRows];
+        if ([visibleIndexPaths count] > 10) {
+            return;
+        }
         
         NSIndexPath *topIndexPath = [visibleIndexPaths firstObject];
         
@@ -241,7 +241,7 @@
             [self.headerMonthView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionLeft animated:YES];
             [self setScrollingToMonth:YES];
         }
-
+        
     } else if (scrollView == self.headerMonthView) {
         CGPoint centerPoint = CGPointMake(self.headerMonthView.frame.size.width / 2 + scrollView.contentOffset.x, self.headerMonthView.frame.size.height /2 + scrollView.contentOffset.y);
         NSIndexPath *firstIndex = [self.headerMonthView indexPathForItemAtPoint:centerPoint];
@@ -302,29 +302,26 @@
     
     if (collectionView == self.headerDateView) {
         NSDate *date = [(NSArray *)[self.days objectForKey:[self.months objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
-    
+        
         if ([self.delegate respondsToSelector:@selector(dateScrollView:headerCellForDate:)]) {
             return [self.delegate dateScrollView:self headerCellForDate:date];
         }
-    
-    
+        
+        
         IMDateScrollHeaderDateCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"IMDateScrollHeaderDateCell" forIndexPath:indexPath];
-    
+        
         NSDateFormatter *weekdayFormatter = [[NSDateFormatter alloc] init];
         [weekdayFormatter setDateFormat:@"eee"];
-    
+        
         NSDateFormatter *monthFormatter = [[NSDateFormatter alloc] init];
         [monthFormatter setDateFormat:@"MMM"];
-    
+        
         NSDateFormatter *dayFormatter = [[NSDateFormatter alloc] init];
         [dayFormatter setDateFormat:@"dd"];
-    
-    
-    
+        
         cell.weekdayLabel.text = [[weekdayFormatter stringFromDate:date] uppercaseString];
         cell.dayLabel.text = [dayFormatter stringFromDate:date];
-        cell.monthLabel.text = [[monthFormatter stringFromDate:date] uppercaseString];
-    
+        
         return cell;
     } else {
         IMDateScrollHeaderMonthCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"IMDateScrollHeaderMonthCell" forIndexPath:indexPath];
@@ -353,18 +350,18 @@
     
     if (scrollView == self.headerDateView) {
         CGPoint point = *targetContentOffset;
-    
+        
         UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.headerDateView.collectionViewLayout;
-    
+        
         // This assumes that the values of `layout.sectionInset.left` and
         // `layout.sectionInset.right` are the same with `layout.minimumInteritemSpacing`.
         // Remember that we're trying to snap to one item at a time. So one
         // visible item comprises of its width plus the left margin.
         CGFloat visibleWidth = layout.minimumInteritemSpacing + layout.itemSize.width;
-    
+        
         // It's either we go forwards or backwards.
         int indexOfItemToSnap = round(point.x / visibleWidth);
-    
+        
         // The only exemption is the last item.
         if (indexOfItemToSnap + 1 == [self.headerDateView numberOfItemsInSection:0]) { // last item
             *targetContentOffset = CGPointMake(self.headerDateView.contentSize.width -

@@ -12,7 +12,6 @@
 
 @property (nonatomic, strong) UIView *circleView;
 @property (nonatomic, strong) UILabel *dayLabel;
-@property (nonatomic, strong) UILabel *monthLabel;
 @property (nonatomic, strong) UILabel *weekdayLabel;
 
 @end
